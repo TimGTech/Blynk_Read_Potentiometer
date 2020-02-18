@@ -1,0 +1,32 @@
+
+#include <blynk.h>
+
+// This code is to read value of a potentiometer on Blynk app using the Value widget
+
+
+BlynkTimer timer;
+
+// Use Virtual pin 5 for potentiometer display
+#define POT_PIN V5
+
+// This function tells Arduino to read and send pot vsalue
+// which is requesting data for Virtual Pin (5)
+void sendPot()
+{
+  // This command writes potentiometer value to virtual pin(5)
+  Blynk.virtualWrite(POT_PIN, analogRead(A5));
+}
+
+void setup()
+{
+  
+Blynk.begin("put your auth code here");
+ 
+timer.setInterval(1000L, sendSensor);  // set so it only will send once per secod using Blynk's timer.
+}
+
+void loop()
+{
+  Blynk.run();
+  timer.run();
+}
